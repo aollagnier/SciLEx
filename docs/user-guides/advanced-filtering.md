@@ -33,7 +33,7 @@ flowchart TB
 | Stage | Papers In | Removed | Papers Out | Description |
 |-------|-----------|---------|------------|-------------|
 | **API Collection** | — | — | 200,000 | Raw results from 10 academic APIs |
-| **Deduplication** | 200,000 | 160,000 (80%) | 40,000 | Merge duplicates via DOI + fuzzy title matching |
+| **Deduplication** | 200,000 | 160,000 (80%) | 40,000 | Merge duplicates via DOI + normalized title exact match |
 | **ItemType Filter** | 40,000 | 5,000 | 35,000 | Keep only valid publication types |
 | **Keyword Filter** | 35,000 | 20,000 | 15,000 | Enforce dual-group keyword matching |
 | **Quality Filter** | 15,000 | 7,000 | 8,000 | Score metadata completeness |

@@ -61,7 +61,7 @@ scilex-aggregate
 Process:
 1. Loads JSON files
 2. Converts to unified format
-3. Deduplicates (DOI, URL, fuzzy title)
+3. Deduplicates (DOI + normalized title exact match)
 4. Applies keyword filtering
 5. Scores quality
 6. Saves to CSV
@@ -130,7 +130,7 @@ Generates `aggregated_results.bib` in the collection directory.
 
 ## Filtering Pipeline
 
-Aggregation applies a 5-phase filtering pipeline — deduplication, itemType, keyword, quality, citation, and relevance ranking. Check logs to see papers filtered at each step.
+Aggregation applies a 5-phase filtering pipeline — ItemType Filter, Keyword Filter, Quality Filter, Citation Filter, and Relevance Ranking. Deduplication runs before the pipeline as a preliminary step. Check logs to see papers filtered at each step.
 
 See [Advanced Filtering](advanced-filtering.md) for the full pipeline flowchart, per-phase configuration, and citation threshold details.
 
