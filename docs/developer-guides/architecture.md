@@ -38,7 +38,7 @@ Orchestrates parallel API collection:
 Processes collected papers:
 1. Load JSON files from all APIs
 2. Convert to unified format
-3. Deduplicate (DOI, URL, fuzzy title)
+3. Deduplicate (DOI + normalized title exact match)
 4. Apply keyword filtering
 5. Score quality
 6. Filter by citations
