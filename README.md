@@ -78,7 +78,12 @@ cp scilex/api.config.yml.example scilex/api.config.yml
 cp scilex/scilex.config.yml.example scilex/scilex.config.yml
 cp scilex/scilex.advanced.yml.example scilex/scilex.advanced.yml
 
-# 2. Collect papers from APIs
+# 2. Activate your environment (pip/venv users)
+source .venv/bin/activate       # macOS/Linux
+# .venv\Scripts\activate        # Windows
+# uv users: no activation needed, use: uv run scilex-collect
+
+# 3. Collect papers from APIs
 scilex-collect
 
 # 3. Deduplicate & filter

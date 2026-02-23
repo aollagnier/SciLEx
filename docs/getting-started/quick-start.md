@@ -34,7 +34,9 @@ collect_name: "test"
 # With uv (no activation needed)
 uv run scilex-collect
 
-# With pip (venv must be activated)
+# With pip: activate your environment first
+source .venv/bin/activate       # macOS/Linux
+# .venv\Scripts\activate        # Windows
 scilex-collect
 ```
 
