@@ -227,7 +227,7 @@ Célian Ringwald, Benjamin Navet. SciLEx, Science Literature Exploration Toolkit
 ```bibtex
 @softwareversion{scilex2026,
   TITLE = {{SciLEx, Science Literature Exploration Toolkit}},
-  AUTHOR = {Ringwald, Célian and Navey, Benjamin},
+  AUTHOR = {Ringwald, Célian and Navet, Benjamin},
   URL = {https://github.com/Wimmics/SciLEx},
   NOTE = {},
   INSTITUTION = {{University Côte d'Azur ; CNRS ; Inria}},
