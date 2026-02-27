@@ -111,8 +111,7 @@ ResearchRabbit, Litmaps, and ConnectedPapers are web-based citation mapping tool
 
 # Development agenda
 
-- The usage of SciLEx in fastmoving and dynamic research fields may ask to use SciLEx to also update and extend an existing collection. The experience of our survey [@celian2025systematicreviewrelationextraction], also demonstrated the high annotation cost requiered by a Systematic Literature Review. The collaborative tag annotation of the corpora collected and enriched using Zotero, let us envisagate the potentially extension that could also be derived from it from keywords extraction for future collects or the extension of the annotation to the full corpora after Annotation Guideline consolidation and cross-annotation.  
-
+- The use of SciLEx in fast-moving and dynamic research fields may also involve updating and extending an existing literature collection. Our experience in conducting the survey [@celian2025systematicreviewrelationextraction] further highlighted the substantial annotation effort required for a systematic literature review. The collaborative tagging and annotation of the collected corpus—managed and enriched through Zotero—suggest promising extensions of this workflow. In particular, extracted keywords could inform future collection rounds, while annotation could be progressively expanded to the full corpus following the consolidation of annotation guidelines and the implementation of cross-annotation procedures.
 # Acknowledgements
 
 This work was supported by the French government through the France 2030 investment plan managed by the National Research Agency (ANR), as part of the Initiative of Excellence Université Côte d'Azur (ANR-15-IDEX-01). Additional support came from the French government's France 2030 investment plan (ANR-22-CPJ2-0048-01), through 3IA Côte d'Azur (ANR-23-IACL-0001).
