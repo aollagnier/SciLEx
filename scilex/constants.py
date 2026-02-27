@@ -1,5 +1,4 @@
-"""
-Constants and helper functions for SciLEx.
+"""Constants and helper functions for SciLEx.
 
 This module centralizes commonly used constants and provides helper functions
 for consistent data validation across the codebase.
@@ -69,8 +68,7 @@ class ZoteroConstants:
 
 
 def is_valid(value) -> bool:
-    """
-    Check if a value is not null, NaN, or the missing value string.
+    """Check if a value is not null, NaN, or the missing value string.
 
     This function provides a consistent way to check for missing data across
     the codebase, handling both string "NA" values and pandas NaN values.
@@ -101,8 +99,7 @@ def is_valid(value) -> bool:
 
 
 def is_missing(value) -> bool:
-    """
-    Check if a value is missing (null, NaN, or the missing value string).
+    """Check if a value is missing (null, NaN, or the missing value string).
 
     This is the inverse of is_valid() for cases where checking for
     missing values is more intuitive.
@@ -117,8 +114,7 @@ def is_missing(value) -> bool:
 
 
 def safe_str(value, default: str = MISSING_VALUE) -> str:
-    """
-    Safely convert a value to string, returning default if value is missing.
+    """Safely convert a value to string, returning default if value is missing.
 
     Args:
         value: The value to convert
@@ -133,8 +129,7 @@ def safe_str(value, default: str = MISSING_VALUE) -> str:
 
 
 def normalize_path_component(path_component: str) -> str:
-    """
-    Remove leading/trailing slashes from path components.
+    """Remove leading/trailing slashes from path components.
 
     Ensures os.path.join() works correctly by preventing absolute path behavior
     when config values mistakenly contain leading slashes (e.g., "/aggregated_results.csv").

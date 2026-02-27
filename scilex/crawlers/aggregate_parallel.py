@@ -1,5 +1,4 @@
-"""
-Parallel aggregation module for paper processing.
+"""Parallel aggregation module for paper processing.
 
 Processing stages:
 1. Parallel file loading (threading): Load JSON files, I/O bound
@@ -25,8 +24,7 @@ from scilex.constants import is_valid
 
 
 def discover_api_directories(dir_collect: str) -> dict[str, list[str]]:
-    """
-    Discover API directories and query indices from filesystem.
+    """Discover API directories and query indices from filesystem.
 
     Scans the collection directory to find:
     - API subdirectories (e.g., SemanticScholar, OpenAlex)
@@ -92,8 +90,7 @@ def discover_api_directories(dir_collect: str) -> dict[str, list[str]]:
 def reconstruct_query_to_keywords_mapping(
     config_used: dict,
 ) -> dict[str, dict[str, list[str]]]:
-    """
-    Reconstruct query index → keywords mapping from config_used.yml.
+    """Reconstruct query index → keywords mapping from config_used.yml.
 
     Reproduces the same cartesian product used during collection to map
     query indices to their corresponding keyword combinations.
@@ -190,8 +187,7 @@ def reconstruct_query_to_keywords_mapping(
 def _load_json_file(
     file_path: str, api_name: str, keywords: list[str]
 ) -> tuple[list[dict], str, list[str], int]:
-    """
-    Load a single JSON file and return its papers.
+    """Load a single JSON file and return its papers.
 
     Args:
         file_path: Path to JSON file
@@ -222,8 +218,7 @@ def parallel_load_all_files(
     config_used: dict,
     num_workers: int | None = None,
 ) -> tuple[list[tuple[dict, str, list[str]]], dict]:
-    """
-    Load all JSON files in parallel using threading.
+    """Load all JSON files in parallel using threading.
 
     Args:
         dir_collect: Base collection directory path
@@ -341,8 +336,7 @@ def parallel_load_all_files(
 def _process_batch_worker(
     args: tuple[list[tuple], str, list],
 ) -> list[dict]:
-    """
-    Worker function to process a batch of papers (spawn-safe, module-level).
+    """Worker function to process a batch of papers (spawn-safe, module-level).
 
     Args:
         args: Tuple of (batch, keyword_groups)
@@ -419,8 +413,7 @@ def parallel_process_papers(
     num_workers: int | None = None,
     keyword_groups: list | None = None,
 ) -> tuple[pd.DataFrame, dict]:
-    """
-    Process papers in parallel batches (convert format + text filtering).
+    """Process papers in parallel batches (convert format + text filtering).
 
     Args:
         papers_by_api: List of (paper_dict, api_name, keywords) tuples
@@ -540,8 +533,7 @@ def _merge_archives_for_duplicates(archives: list[str], winner_archive: str) -> 
 
 
 def simple_deduplicate(df: pd.DataFrame) -> tuple[pd.DataFrame, dict]:
-    """
-    Simple, fast deduplication using hash-based exact matching.
+    """Simple, fast deduplication using hash-based exact matching.
 
     Strategy:
     1. DOI-based dedup (hash set, O(n))
@@ -739,8 +731,7 @@ def parallel_aggregate(
     batch_size: int = 5000,
     keyword_groups: list | None = None,
 ) -> tuple[pd.DataFrame, dict]:
-    """
-    Main parallel aggregation function (orchestrates all phases).
+    """Main parallel aggregation function (orchestrates all phases).
 
     Args:
         dir_collect: Base collection directory

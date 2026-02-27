@@ -1,5 +1,4 @@
-"""
-Quality validation module for SciLEx.
+"""Quality validation module for SciLEx.
 
 This module provides functions to validate paper metadata quality based on
 configurable thresholds. It helps filter out incomplete or low-quality records
@@ -118,8 +117,7 @@ def count_authors(authors_value) -> int:
 
 
 def validate_abstract(abstract, min_words: int, max_words: int) -> tuple[bool, str]:
-    """
-    Validate abstract quality.
+    """Validate abstract quality.
 
     Returns:
         (is_valid, reason): Tuple of validation result and reason if invalid
@@ -139,8 +137,7 @@ def validate_abstract(abstract, min_words: int, max_words: int) -> tuple[bool, s
 
 
 def passes_quality_filters(record: dict, filters: dict) -> tuple[bool, str]:
-    """
-    Check if a paper record passes all quality filters.
+    """Check if a paper record passes all quality filters.
 
     Args:
         record: Dictionary containing paper metadata
@@ -220,8 +217,7 @@ def passes_quality_filters(record: dict, filters: dict) -> tuple[bool, str]:
 def apply_quality_filters(
     df: pd.DataFrame, filters: dict, generate_report: bool = True
 ) -> tuple[pd.DataFrame, QualityReport]:
-    """
-    Apply quality filters to a DataFrame of papers.
+    """Apply quality filters to a DataFrame of papers.
 
     Args:
         df: DataFrame with paper records
@@ -263,8 +259,7 @@ def apply_quality_filters(
 
 
 def generate_data_completeness_report(df: pd.DataFrame) -> str:
-    """
-    Generate a report showing data completeness for key fields.
+    """Generate a report showing data completeness for key fields.
 
     Args:
         df: DataFrame with paper records

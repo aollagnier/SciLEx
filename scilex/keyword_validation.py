@@ -1,5 +1,4 @@
-"""
-Keyword validation module for SciLEx.
+"""Keyword validation module for SciLEx.
 
 This module validates that collected papers actually contain the search keywords,
 helping identify API false positives and assess collection quality.
@@ -25,8 +24,7 @@ def normalize_text(text: str) -> str:
 
 
 def check_keyword_in_text(keyword: str, text: str) -> bool:
-    """
-    Check if keyword appears in text (case-insensitive, handles phrases).
+    """Check if keyword appears in text (case-insensitive, handles phrases).
 
     Args:
         keyword: Keyword or phrase to search for
@@ -48,8 +46,7 @@ def check_keywords_in_paper(
     record: dict,
     keywords: list[list[str]],
 ) -> tuple[bool, list[str]]:
-    """
-    Check if paper contains search keywords in title or abstract.
+    """Check if paper contains search keywords in title or abstract.
 
     Args:
         record: Paper record dictionary
@@ -98,8 +95,7 @@ def generate_keyword_validation_report(
     df: pd.DataFrame,
     keywords: list[list[str]],
 ) -> str:
-    """
-    Generate a report on keyword presence in collected papers.
+    """Generate a report on keyword presence in collected papers.
 
     Args:
         df: DataFrame with paper records
@@ -192,8 +188,7 @@ def generate_keyword_validation_report(
 def filter_by_keywords(
     df: pd.DataFrame, keywords: list[list[str]], strict: bool = False
 ) -> pd.DataFrame:
-    """
-    Filter DataFrame to keep only papers containing keywords.
+    """Filter DataFrame to keep only papers containing keywords.
 
     Args:
         df: DataFrame with paper records

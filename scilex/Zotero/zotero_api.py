@@ -1,5 +1,4 @@
-"""
-Zotero API client for managing collections and items.
+"""Zotero API client for managing collections and items.
 
 This module provides a clean interface to interact with the Zotero API,
 handling authentication, collection management, and item creation.
@@ -18,8 +17,7 @@ from scilex.constants import MISSING_VALUE, ZoteroConstants, is_valid
 
 
 class ZoteroAPI:
-    """
-    Client for interacting with the Zotero API.
+    """Client for interacting with the Zotero API.
 
     This class encapsulates all Zotero API operations including:
     - Authentication and authorization
@@ -35,8 +33,7 @@ class ZoteroAPI:
     """
 
     def __init__(self, user_id: str, user_role: str, api_key: str):
-        """
-        Initialize the Zotero API client.
+        """Initialize the Zotero API client.
 
         Args:
             user_id: Zotero user or group ID
@@ -60,8 +57,7 @@ class ZoteroAPI:
         self.headers = {"Zotero-API-Key": self.api_key}
 
     def _get_write_token(self) -> str:
-        """
-        Generate a random write token for Zotero API.
+        """Generate a random write token for Zotero API.
 
         Returns:
             A 32-character random token
@@ -74,8 +70,7 @@ class ZoteroAPI:
         )
 
     def _get(self, path: str, params: dict | None = None) -> requests.Response | None:
-        """
-        Perform a GET request to the Zotero API.
+        """Perform a GET request to the Zotero API.
 
         Args:
             path: API path (e.g., "/collections")
@@ -100,8 +95,7 @@ class ZoteroAPI:
     def _post(
         self, path: str, data: Any, timeout: int = 120
     ) -> requests.Response | None:
-        """
-        Perform a POST request to the Zotero API.
+        """Perform a POST request to the Zotero API.
 
         Args:
             path: API path (e.g., "/items")
@@ -133,8 +127,7 @@ class ZoteroAPI:
         return None
 
     def get_collections(self, limit: int = 100) -> list[dict] | None:
-        """
-        Retrieve all collections for the user/group.
+        """Retrieve all collections for the user/group.
 
         Args:
             limit: Maximum number of collections to retrieve per request
@@ -151,8 +144,7 @@ class ZoteroAPI:
         return None
 
     def find_collection_by_name(self, name: str) -> dict | None:
-        """
-        Find a collection by its name.
+        """Find a collection by its name.
 
         Args:
             name: The collection name to search for
@@ -172,8 +164,7 @@ class ZoteroAPI:
         return None
 
     def create_collection(self, name: str) -> dict | None:
-        """
-        Create a new collection.
+        """Create a new collection.
 
         Args:
             name: Name for the new collection
@@ -191,8 +182,7 @@ class ZoteroAPI:
         return None
 
     def get_or_create_collection(self, name: str) -> dict | None:
-        """
-        Get an existing collection or create it if it doesn't exist.
+        """Get an existing collection or create it if it doesn't exist.
 
         Args:
             name: Collection name to find or create
@@ -209,8 +199,7 @@ class ZoteroAPI:
         return self.create_collection(name)
 
     def get_collection_items(self, collection_key: str, limit: int = 100) -> list[dict]:
-        """
-        Get all items in a collection.
+        """Get all items in a collection.
 
         Args:
             collection_key: The collection's key
@@ -251,8 +240,7 @@ class ZoteroAPI:
         return items
 
     def get_existing_item_urls(self, collection_key: str) -> set:
-        """
-        Get URLs of all existing items in a collection.
+        """Get URLs of all existing items in a collection.
 
         This is useful for checking duplicates before adding new items.
         Returns a set for O(1) lookup performance.
@@ -275,8 +263,7 @@ class ZoteroAPI:
         return urls
 
     def get_item_template(self, item_type: str) -> dict | None:
-        """
-        Get the Zotero template for a specific item type.
+        """Get the Zotero template for a specific item type.
 
         Args:
             item_type: The Zotero item type (e.g., "journalArticle")
@@ -295,8 +282,7 @@ class ZoteroAPI:
         return None
 
     def post_item(self, item_data: dict) -> bool:
-        """
-        Post a single item to Zotero.
+        """Post a single item to Zotero.
 
         Args:
             item_data: Item data dictionary (must match Zotero schema)
@@ -317,8 +303,7 @@ class ZoteroAPI:
     def post_items_bulk(
         self, items: list[dict], batch_size: int = 50
     ) -> dict[str, int]:
-        """
-        Post multiple items to Zotero using true bulk API calls.
+        """Post multiple items to Zotero using true bulk API calls.
 
         Zotero API supports up to 50 items per POST request. This method
         batches items appropriately for optimal performance. If a batch fails
@@ -379,8 +364,7 @@ class ZoteroAPI:
         return results
 
     def _retry_with_smaller_batches(self, items: list[dict]) -> dict[str, int]:
-        """
-        Retry posting items with progressively smaller batch sizes.
+        """Retry posting items with progressively smaller batch sizes.
 
         Args:
             items: List of items that failed in a larger batch
@@ -430,8 +414,7 @@ def prepare_zotero_item(
     collection_key: str,
     templates_cache: dict[str, dict],
 ) -> dict | None:
-    """
-    Prepare a Zotero item from a DataFrame row.
+    """Prepare a Zotero item from a DataFrame row.
 
     Args:
         row: DataFrame row containing paper metadata (Series or named tuple from itertuples)

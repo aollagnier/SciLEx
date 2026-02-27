@@ -8,13 +8,10 @@ from .base import API_collector
 
 
 class SemanticScholar_collector(API_collector):
-    """
-    Collector for fetching publication metadata from the Semantic Scholar API.
-    """
+    """Collector for fetching publication metadata from the Semantic Scholar API."""
 
     def __init__(self, filter_param, data_path, api_key):
-        """
-        Initializes the Semantic Scholar collector with the given parameters.
+        """Initializes the Semantic Scholar collector with the given parameters.
 
         Args:
             filter_param (dict): Parameters for filtering results (years, keywords, mode, etc.).
@@ -48,8 +45,7 @@ class SemanticScholar_collector(API_collector):
     def api_call_decorator(
         self, configurated_url, max_retries=CircuitBreakerConfig.MAX_RETRIES
     ):
-        """
-        API call with SemanticScholar-specific headers.
+        """API call with SemanticScholar-specific headers.
         Calls parent decorator with circuit breaker and retry logic.
 
         Args:
@@ -65,8 +61,7 @@ class SemanticScholar_collector(API_collector):
         )
 
     def parsePageResults(self, response, page):
-        """
-        Parses the results from a response for a specific page.
+        """Parses the results from a response for a specific page.
 
         Args:
             response (requests.Response): The API response object containing the results.
@@ -75,7 +70,6 @@ class SemanticScholar_collector(API_collector):
         Returns:
             dict: A dictionary containing metadata about the collected results, including the total count and the results themselves.
         """
-
         page_data = {
             "date_search": str(date.today()),
             "id_collect": self.get_collectId(),
@@ -137,8 +131,7 @@ class SemanticScholar_collector(API_collector):
         return page_data
 
     def get_configurated_url(self):
-        """
-        Constructs the configured API URL with query parameters.
+        """Constructs the configured API URL with query parameters.
 
         Returns:
             str: The formatted API URL with the constructed query parameters.

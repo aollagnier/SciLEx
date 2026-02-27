@@ -24,8 +24,7 @@ api_references = "https://opencitations.net/index/coci/api/v1/references/"
 @sleep_and_retry
 @limits(calls=1, period=1)  # OpenCitations public API limit: 1 req/sec
 def getCitations(doi):
-    """
-    Fetch citation data for a given DOI from OpenCitations API.
+    """Fetch citation data for a given DOI from OpenCitations API.
 
     Args:
         doi: The DOI to fetch citations for
@@ -60,8 +59,7 @@ def getCitations(doi):
 @sleep_and_retry
 @limits(calls=1, period=1)  # OpenCitations public API limit: 1 req/sec
 def getReferences(doi):
-    """
-    Fetch reference data for a given DOI from OpenCitations API.
+    """Fetch reference data for a given DOI from OpenCitations API.
 
     Args:
         doi: The DOI to fetch references for
@@ -86,8 +84,7 @@ def getReferences(doi):
 
 
 def getRefandCitFormatted(doi_str):
-    """
-    Fetch both citations and references for a DOI and return formatted results.
+    """Fetch both citations and references for a DOI and return formatted results.
 
     Args:
         doi_str: The DOI string (may include https://doi.org/ prefix)

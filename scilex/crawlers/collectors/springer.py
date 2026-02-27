@@ -9,8 +9,7 @@ class Springer_collector(API_collector):
     """Store file metadata from Springer API."""
 
     def __init__(self, filter_param, data_path, api_key):
-        """
-        Initialize the Springer Collector.
+        """Initialize the Springer Collector.
 
         Args:
             filter_param (dict): The filter parameters for the search query.
@@ -36,8 +35,7 @@ class Springer_collector(API_collector):
         self.load_rate_limit_from_config()
 
     def parsePageResults(self, response, page):
-        """
-        Parses the JSON response from the API for a specific page of results.
+        """Parses the JSON response from the API for a specific page of results.
 
         Args:
             response (requests.Response): The response object from the API call.
@@ -92,8 +90,7 @@ class Springer_collector(API_collector):
         return page_data
 
     def construct_search_query(self):
-        """
-        Constructs a search query for the Springer API from the keyword sets.
+        """Constructs a search query for the Springer API from the keyword sets.
         The format will be:
         (title:"keyword1" OR title:"keyword2") AND (title:"keyword3" OR title:"keyword4")
         """
@@ -110,8 +107,7 @@ class Springer_collector(API_collector):
         return search_query
 
     def get_configurated_url(self):
-        """
-        Constructs the URLs for both API endpoints.
+        """Constructs the URLs for both API endpoints.
 
         Returns:
             list: A list of constructed API URLs for both endpoints.
@@ -129,8 +125,7 @@ class Springer_collector(API_collector):
         return [meta_url, openaccess_url]
 
     def collect_from_endpoints(self):
-        """
-        Collects data from both the meta and openaccess endpoints with pagination.
+        """Collects data from both the meta and openaccess endpoints with pagination.
 
         Returns:
             list: Combined results from both endpoints.

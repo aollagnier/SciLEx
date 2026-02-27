@@ -678,8 +678,7 @@ def _apply_relevance_ranking(
 
 
 def _apply_itemtype_bypass(df, bypass_item_types):
-    """
-    Separate papers into bypass and non-bypass groups based on itemType.
+    """Separate papers into bypass and non-bypass groups based on itemType.
 
     Papers with itemTypes in bypass_item_types skip subsequent quality filters.
     This speeds up processing for high-quality publication types.
@@ -716,8 +715,7 @@ def _apply_itemtype_bypass(df, bypass_item_types):
 
 
 def _apply_itemtype_filter(df, allowed_types, enabled):
-    """
-    Filter papers to only keep specified itemTypes (whitelist mode).
+    """Filter papers to only keep specified itemTypes (whitelist mode).
 
     This filter runs EARLY in the pipeline (after deduplication, before quality filters)
     to remove unwanted publication types. Papers with missing/NA itemType are removed
@@ -1070,8 +1068,7 @@ def _fetch_citation_for_paper(
     ss_reference_count=None,
     crossref_mailto=None,
 ):
-    """
-    Fetch citations for a single paper (thread-safe with four-tier strategy).
+    """Fetch citations for a single paper (thread-safe with four-tier strategy).
 
     Four-tier strategy: Cache → Semantic Scholar → CrossRef → OpenCitations
     1. Check citation cache first (instant, no API call)
@@ -1867,7 +1864,9 @@ def main():
     log_section(logger, "SciLEx Data Aggregation")
 
     txt_filters = True  # Text filtering is always enabled (False path unimplemented)
-    get_citation = main_config.get("aggregate_get_citations", True) and not args.skip_citations
+    get_citation = (
+        main_config.get("aggregate_get_citations", True) and not args.skip_citations
+    )
     output_dir = main_config.get("output_dir", DEFAULT_OUTPUT_DIR)
     collect_name = normalize_path_component(main_config.get("collect_name"))
     dir_collect = os.path.join(output_dir, collect_name)
@@ -1884,8 +1883,6 @@ def main():
     logger.info(
         f"Citation fetching: {'enabled' if get_citation else 'disabled (use --skip-citations to disable)'}"
     )
-
-    all_data = []
 
     # Initialize filtering tracker
     filtering_tracker = FilteringTracker()

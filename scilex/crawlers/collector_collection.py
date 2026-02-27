@@ -44,8 +44,7 @@ api_collectors = {
 
 
 def _sanitize_error_message(error_msg):
-    """
-    Remove sensitive information (API keys, tokens) from error messages.
+    """Remove sensitive information (API keys, tokens) from error messages.
 
     Args:
         error_msg: Error message string that may contain sensitive parameters
@@ -66,8 +65,7 @@ def _sanitize_error_message(error_msg):
 def _run_job_collects_worker(
     api_name, collect_list, api_config, output_dir, collect_name, progress_queue
 ):
-    """
-    Thread worker function for one API.
+    """Thread worker function for one API.
     Processes all queries for the assigned API and sends progress updates via queue.
 
     Args:
@@ -195,7 +193,7 @@ class CollectCollection:
             inst_token = None  # For Elsevier institutional token
 
             if coll["api"] in self.api_config:
-                api_key = self.api_config[coll["api"]]["api_key"]
+                api_key = self.api_config[coll["api"]].get("api_key")
                 # Check for institutional token (Elsevier only)
                 if (
                     coll["api"] == "Elsevier"
@@ -221,11 +219,9 @@ class CollectCollection:
         return os.path.join(output_dir, self.main_config["collect_name"])
 
     def queryCompositor(self):
+        """Generates all potential combinations of keyword groups, years, APIs, and fields.
+        list: A list of dictionaries, each representing a unique combination.
         """
-        Generates all potential combinations of keyword groups, years, APIs, and fields.
-            list: A list of dictionaries, each representing a unique combination.
-        """
-
         # Generate all combinations of keywords from two different groups
         keyword_combinations = []
         two_list_k = False
@@ -316,8 +312,7 @@ class CollectCollection:
         return queries_by_api
 
     def init_collection_collect(self):
-        """
-        Initialize collection directory and save config snapshot.
+        """Initialize collection directory and save config snapshot.
 
         Creates output directory if needed and saves a snapshot of the config
         for use by aggregation later.
@@ -336,8 +331,7 @@ class CollectCollection:
         logging.debug(f"Saved config snapshot to: {config_path}")
 
     def _query_is_complete(self, repo, api, query_idx):
-        """
-        Check if a query is complete by checking for result files.
+        """Check if a query is complete by checking for result files.
 
         Args:
             repo: Collection directory path
@@ -364,8 +358,7 @@ class CollectCollection:
             return False
 
     def create_collects_jobs(self):
-        """
-        Create collection jobs and run them in parallel.
+        """Create collection jobs and run them in parallel.
 
         Uses file existence checks for idempotent collections:
         - Skips queries that already have result files
@@ -495,7 +488,9 @@ class CollectCollection:
                         if api_name in api_progress_bars:
                             pbar = api_progress_bars[api_name]
                             pbar.update(1)
-                            pbar.set_postfix({"papers": api_stats[api_name]["articles"]})
+                            pbar.set_postfix(
+                                {"papers": api_stats[api_name]["articles"]}
+                            )
 
                             # Log milestone when query completes
                             completed = api_stats[api_name]["completed"]
@@ -503,7 +498,10 @@ class CollectCollection:
                             total_articles = api_stats[api_name]["articles"]
 
                             # Log at 25%, 50%, 75%, and 100% completion
-                            if completed % max(1, total // 4) == 0 or completed == total:
+                            if (
+                                completed % max(1, total // 4) == 0
+                                or completed == total
+                            ):
                                 logging.debug(
                                     f"[{api_name}] Progress: {completed}/{total} queries | {total_articles} papers collected"
                                 )

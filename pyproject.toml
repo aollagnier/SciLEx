@@ -10,7 +10,8 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "beautifulsoup4>=4.13",
-    "bibtexparser>=1.4",
+    "bibtexparser>=2.0.0b7",
+    "rdflib>=7.0",
     "fake-useragent>=2.0",
     "huggingface-hub>=1.2.1",
     "httpx<0.28.0",
@@ -40,6 +41,8 @@ scilex-aggregate = "scilex.aggregate_collect:main"
 scilex-enrich = "scilex.enrich_with_hf:main"
 scilex-push-zotero = "scilex.push_to_zotero:main"
 scilex-export-bibtex = "scilex.export_to_bibtex:main"
+scilex-enrich-citations = "scilex.enrich_with_citations:main"
+scilex-export-turtle = "scilex.export_to_turtle:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -80,6 +83,8 @@ exclude = [
     "dist",
     "build",
     ".deprecated",
+    "docs",
+    "scilex/HuggingFace",
 ]
 
 [tool.ruff.lint]
@@ -90,11 +95,27 @@ select = [
     "B",    # flake8-bugbear
     "SIM",  # flake8-simplify
     "I",    # isort
+    "D",    # pydocstyle
 ]
 ignore = [
     "E501",    # Line too long (handled by formatter)
     "SIM103",  # Return negated condition directly (style preference)
+    "D100",    # Missing docstring in public module (many legacy modules lack it)
+    "D101",    # Missing docstring in public class (pre-existing)
+    "D102",    # Missing docstring in public method (pre-existing)
+    "D103",    # Missing docstring in public function (pre-existing)
+    "D104",    # Missing docstring in public package (__init__.py)
+    "D105",    # Missing docstring in magic method (__repr__ etc.)
+    "D107",    # Missing docstring in __init__ (redundant when class has docstring)
+    "D200",    # One-line docstring should fit on one line (pre-existing)
+    "D205",    # 1 blank line required between summary and description (pre-existing)
+    "D301",    # Use r""" for backslashes in docstring (pre-existing)
+    "D415",    # First line should end with punctuation (pre-existing)
+    "D417",    # Missing argument descriptions in docstring (pre-existing)
 ]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D100", "D101", "D102", "D103"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

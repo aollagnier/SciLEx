@@ -107,8 +107,7 @@ class API_collector:
         self._last_call_time = time.monotonic()
 
     def load_rate_limit_from_config(self):
-        """
-        Load rate limit for this API from the configuration file.
+        """Load rate limit for this API from the configuration file.
         Falls back to DEFAULT_RATE_LIMITS if config is not available.
         Automatically selects with_key/without_key rate based on self.api_key.
 
@@ -152,8 +151,7 @@ class API_collector:
     def log_api_usage(
         self, response: requests.Response | None, page: int, results_count: int
     ):
-        """
-        Log API usage statistics for monitoring and debugging.
+        """Log API usage statistics for monitoring and debugging.
 
         Args:
             response: The API response object (or None if request failed)
@@ -217,8 +215,7 @@ class API_collector:
         self.state = complete
 
     def savePageResults(self, global_data, page):
-        """
-        Save page results with buffering.
+        """Save page results with buffering.
         Results are buffered and written in batches to reduce I/O overhead.
         """
         # Add to buffer
@@ -283,8 +280,7 @@ class API_collector:
         return self.rate_limit
 
     def _get_auth_recovery_actions(self, status_code):
-        """
-        Get specific recovery actions for authentication errors based on API and status code.
+        """Get specific recovery actions for authentication errors based on API and status code.
 
         Args:
             status_code: HTTP status code (401 or 403)
@@ -335,8 +331,7 @@ class API_collector:
 
     @staticmethod
     def _sanitize_url(url):
-        """
-        Remove sensitive information (API keys, tokens) from URLs for logging.
+        """Remove sensitive information (API keys, tokens) from URLs for logging.
 
         Args:
             url: URL string that may contain sensitive parameters
@@ -360,8 +355,7 @@ class API_collector:
         max_retries=CircuitBreakerConfig.MAX_RETRIES,
         headers=None,
     ):
-        """
-        API call decorator with circuit breaker, retry logic, and error handling.
+        """API call decorator with circuit breaker, retry logic, and error handling.
 
         Args:
             configurated_url: The URL to call
@@ -592,13 +586,11 @@ class API_collector:
         pass
 
     def runCollect(self):
-        """
-        Runs the collection process for DBLP and Springer publications.
+        """Runs the collection process for DBLP and Springer publications.
 
         This method retrieves publication data in pages until all results
         are collected or a specified limit is reached.
         """
-
         state_data = {
             "state": self.state,
             "last_page": self.lastpage,

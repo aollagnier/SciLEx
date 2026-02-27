@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Created on Fri Feb 10 10:57:49 2023
+"""Created on Fri Feb 10 10:57:49 2023
 
 @author: cringwal
          aollagnier
@@ -29,8 +28,7 @@ def safe_has_key(obj, key):
 
 
 def clean_doi(doi_value):
-    """
-    Extract clean DOI from URL-formatted DOI or return as-is.
+    """Extract clean DOI from URL-formatted DOI or return as-is.
 
     Converts: "https://doi.org/10.1007/..." → "10.1007/..."
     Keeps: "10.1007/..." → "10.1007/..."
@@ -114,7 +112,6 @@ def getquality(df_row, column_names):
     return quality
 
 
-
 def _find_best_duplicate_index(duplicates_df, column_names):
     """Find the best duplicate record, preferring most recent then quality."""
     quality_list = []
@@ -186,8 +183,7 @@ def _fill_missing_values(row, column_values_dict, column_names):
 
 
 def deduplicate(df_input):
-    """
-    Remove duplicate papers by DOI and exact title matching.
+    """Remove duplicate papers by DOI and exact title matching.
 
     Args:
         df_input: Input DataFrame

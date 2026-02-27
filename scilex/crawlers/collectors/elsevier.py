@@ -10,8 +10,7 @@ class Elsevier_collector(API_collector):
     """Store file metadata from Elsevier API."""
 
     def __init__(self, filter_param, data_path, api_key, inst_token=None):
-        """
-        Initialize Elsevier Scopus API collector.
+        """Initialize Elsevier Scopus API collector.
 
         Args:
             filter_param: Filter parameters for the search
@@ -37,8 +36,7 @@ class Elsevier_collector(API_collector):
     def api_call_decorator(
         self, configurated_url, max_retries=CircuitBreakerConfig.MAX_RETRIES
     ):
-        """
-        API call with Elsevier-specific headers and optional institutional token.
+        """API call with Elsevier-specific headers and optional institutional token.
         Calls parent decorator with circuit breaker and retry logic.
 
         Args:
@@ -82,8 +80,7 @@ class Elsevier_collector(API_collector):
         return page_data
 
     def construct_search_query(self):
-        """
-        Constructs a search query for the API from the keyword sets.
+        """Constructs a search query for the API from the keyword sets.
         The format will be:
         TITLE(NLP OR Natural Language Processing) AND TITLE(Pragmatic OR Pragmatics)
         """

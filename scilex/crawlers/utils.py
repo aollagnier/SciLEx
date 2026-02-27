@@ -5,8 +5,7 @@ import yaml
 
 
 def load_yaml_config(file_path):
-    """
-    Load a YAML configuration file.
+    """Load a YAML configuration file.
 
     Args:
         file_path (str): Path to the YAML file.
@@ -21,10 +20,8 @@ def load_yaml_config(file_path):
         return yaml.safe_load(ymlfile)
 
 
-
 def load_all_configs(config_files):
-    """
-    Load multiple YAML configurations based on a dictionary of file paths.
+    """Load multiple YAML configurations based on a dictionary of file paths.
 
     Config files are resolved relative to the scilex package directory
     (where scilex.config.yml and api.config.yml live).
@@ -45,8 +42,7 @@ def load_all_configs(config_files):
 
 
 def api_collector_decorator(api_name):
-    """
-    Decorator to handle logging and exception management for API collectors.
+    """Decorator to handle logging and exception management for API collectors.
 
     Args:
         api_name (str): The name of the API being collected.

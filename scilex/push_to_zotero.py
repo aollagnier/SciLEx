@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Script to push aggregated papers to Zotero collection.
+"""Script to push aggregated papers to Zotero collection.
 
 This script reads aggregated paper data and pushes it to a specified
 Zotero collection, handling duplicates and creating the collection if needed.
@@ -27,8 +26,7 @@ logging.basicConfig(
 
 
 def load_aggregated_data(config: dict) -> pd.DataFrame:
-    """
-    Load aggregated paper data from CSV file.
+    """Load aggregated paper data from CSV file.
 
     Args:
         config: Main configuration dictionary with output_dir, collect_name, aggregate_file
@@ -66,8 +64,7 @@ def load_aggregated_data(config: dict) -> pd.DataFrame:
 
 
 def prefetch_templates(data: pd.DataFrame) -> dict[str, dict]:
-    """
-    Pre-fetch all unique item type templates before processing.
+    """Pre-fetch all unique item type templates before processing.
 
     This avoids blocking HTTP calls during the main processing loop
     and ensures we only fetch each template once.
@@ -113,8 +110,7 @@ def push_new_items_to_zotero(
     templates_cache: dict[str, dict],
     config: dict,
 ) -> dict[str, int]:
-    """
-    Push new items to Zotero collection using bulk upload.
+    """Push new items to Zotero collection using bulk upload.
 
     Args:
         data: DataFrame containing paper metadata

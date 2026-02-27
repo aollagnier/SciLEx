@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-"""
-Created on Fri Feb 10 10:57:49 2023
+"""Created on Fri Feb 10 10:57:49 2023
 
 @author: cringwal
          aollagnier

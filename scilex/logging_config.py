@@ -1,5 +1,4 @@
-"""
-Centralized logging configuration for SciLEx.
+"""Centralized logging configuration for SciLEx.
 
 This module provides:
 1. Environment-variable controlled log levels (LOG_LEVEL)
@@ -69,14 +68,12 @@ class ColoredFormatter(logging.Formatter):
         return super().format(record)
 
 
-
 def setup_logging(
     level: str | None = None,
     use_colors: bool | None = None,
     log_file: str | None = None,
 ) -> None:
-    """
-    Configure logging for SciLEx.
+    """Configure logging for SciLEx.
 
     Args:
         level: Log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
@@ -141,8 +138,7 @@ def setup_logging(
 
 
 def get_logger(name: str) -> logging.Logger:
-    """
-    Get a logger instance for a module.
+    """Get a logger instance for a module.
 
     Args:
         name: Module name (use __name__)
@@ -153,10 +149,8 @@ def get_logger(name: str) -> logging.Logger:
     return logging.getLogger(name)
 
 
-
 def log_section(logger: logging.Logger, title: str, level: str = "INFO"):
-    """
-    Log a section header with visual separator.
+    """Log a section header with visual separator.
 
     Args:
         logger: Logger instance
@@ -168,5 +162,3 @@ def log_section(logger: logging.Logger, title: str, level: str = "INFO"):
     log_func(separator)
     log_func(title)
     log_func(separator)
-
-

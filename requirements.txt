@@ -5,7 +5,7 @@ anyio==4.10.0
     # via httpx
 beautifulsoup4==4.13.4
     # via scilex
-bibtexparser==1.4.3
+bibtexparser==2.0.0b9
     # via scilex
 certifi==2025.8.3
     # via
@@ -45,6 +45,8 @@ idna==3.10
     #   anyio
     #   httpx
     #   requests
+isodate==0.7.2 ; python_full_version < '3.11'
+    # via rdflib
 lxml==6.0.0
     # via scilex
 numpy==2.2.6 ; python_full_version < '3.11'
@@ -59,8 +61,10 @@ packaging==25.0
     # via huggingface-hub
 pandas==2.3.1
     # via scilex
-pyparsing==3.2.3
+pylatexenc==2.10
     # via bibtexparser
+pyparsing==3.2.3
+    # via rdflib
 python-dateutil==2.9.0.post0
     # via
     #   pandas
@@ -74,6 +78,8 @@ pyyaml==6.0.2
 rapidfuzz==3.14.3
     # via scilex
 ratelimit==2.2.1
+    # via scilex
+rdflib==7.6.0
     # via scilex
 requests==2.32.4
     # via scilex

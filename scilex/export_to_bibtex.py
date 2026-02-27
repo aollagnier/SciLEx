@@ -1,5 +1,4 @@
-"""
-BibTeX Export for SciLEx - Alternative to Zotero push.
+"""BibTeX Export for SciLEx - Alternative to Zotero push.
 
 Exports aggregated paper data to BibTeX format for pipeline integration.
 Supports DOI-based citation keys and direct PDF download links.
@@ -7,6 +6,7 @@ Supports DOI-based citation keys and direct PDF download links.
 
 import logging
 import os
+import re
 import sys
 
 import pandas as pd
@@ -14,12 +14,9 @@ import pandas as pd
 from scilex.config_defaults import DEFAULT_AGGREGATED_FILENAME, DEFAULT_OUTPUT_DIR
 from scilex.constants import is_valid, normalize_path_component
 from scilex.crawlers.utils import load_all_configs
+from scilex.logging_config import setup_logging
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
-)
+setup_logging()
 logger = logging.getLogger(__name__)
 
 
@@ -57,6 +54,9 @@ BIBTEX_SPECIAL_CHARS = {
     "\\": r"\textbackslash{}",
 }
 
+BIBTEX_PLAIN_FILENAME = "aggregated_results.bib"
+BIBTEX_CITATIONS_FILENAME = "aggregated_results_with_citations.bib"
+
 
 def load_config() -> dict:
     """Load scilex.config.yml configuration."""
@@ -68,8 +68,7 @@ def load_config() -> dict:
 
 
 def load_aggregated_data(config: dict) -> pd.DataFrame:
-    """
-    Load aggregated paper data from CSV file.
+    """Load aggregated paper data from CSV file.
 
     Args:
         config: Configuration dictionary with output_dir and collect_name
@@ -120,8 +119,7 @@ def parse_tags(tags_str: str) -> list[str]:
 
 
 def escape_bibtex(text: str) -> str:
-    """
-    Escape special BibTeX characters in text.
+    """Escape special BibTeX characters in text.
 
     Args:
         text: Text to escape
@@ -139,23 +137,44 @@ def escape_bibtex(text: str) -> str:
     return text
 
 
-def format_authors(authors_str: str) -> str:
-    """
-    Format semicolon-separated author list for BibTeX.
-
-    Converts "John Smith;Jane Doe" to "John Smith and Jane Doe"
+def _normalize_doi(s: str) -> str:
+    """Strip doi.org URL prefix from a DOI field value.
 
     Args:
-        authors_str: Semicolon-separated author names
+        s: Raw DOI string that may contain a URL prefix.
 
     Returns:
-        BibTeX-formatted author list
+        Bare DOI starting with "10.".
+    """
+    s = str(s).strip()
+    for prefix in (
+        "https://doi.org/",
+        "http://doi.org/",
+        "https://dx.doi.org/",
+        "http://dx.doi.org/",
+    ):
+        if s.lower().startswith(prefix):
+            return s[len(prefix) :]
+    return s
+
+
+def format_authors(authors_str: str) -> str:
+    """Format author list for BibTeX, handling common separator variants.
+
+    Splits on semicolons or ampersands and joins with BibTeX ``and``.
+    Converts ``"Smith; Jones"`` or ``"Smith & Jones"`` to ``"Smith and Jones"``.
+
+    Args:
+        authors_str: Author names separated by ``;`` or ``&``.
+
+    Returns:
+        BibTeX-formatted author list joined with " and ".
     """
     if not is_valid(authors_str):
         return ""
 
-    authors = [author.strip() for author in authors_str.split(";")]
-    authors = [a for a in authors if a]  # Remove empty strings
+    authors = re.split(r"\s*[;&]\s*", str(authors_str))
+    authors = [a.strip() for a in authors if a.strip()]
 
     if not authors:
         return ""
@@ -164,32 +183,25 @@ def format_authors(authors_str: str) -> str:
 
 
 def format_pages(pages_str: str) -> str:
-    """
-    Format page range for BibTeX (use en-dash).
+    """Format page range for BibTeX using the required double-hyphen en-dash.
 
-    Converts "123-456" to "123--456"
+    Handles variants like ``"345-356"``, ``"345 - 356"``, and ``"345--356"``
+    and normalises them all to ``"345--356"``.
 
     Args:
-        pages_str: Page range string
+        pages_str: Page range string in any common format.
 
     Returns:
-        BibTeX-formatted page range
+        BibTeX-formatted page range with double-hyphen separator.
     """
     if not is_valid(pages_str):
         return ""
 
-    pages_str = str(pages_str).strip()
-    # Replace single dash with double dash (BibTeX en-dash)
-    pages_str = pages_str.replace("-", "--")
-    # But avoid double-replacing if already double
-    pages_str = pages_str.replace("----", "--")
-
-    return pages_str
+    return re.sub(r"\s*-{1,2}\s*", "--", str(pages_str).strip())
 
 
 def extract_year(date_str: str) -> str:
-    """
-    Extract year from date string.
+    """Extract year from date string.
 
     Handles ISO dates (YYYY-MM-DD), years (YYYY), and partial dates.
 
@@ -205,8 +217,6 @@ def extract_year(date_str: str) -> str:
     date_str = str(date_str).strip()
 
     # Extract first 4 consecutive digits (year)
-    import re
-
     match = re.search(r"\d{4}", date_str)
     if match:
         return match.group(0)
@@ -215,8 +225,7 @@ def extract_year(date_str: str) -> str:
 
 
 def generate_citation_key(doi: str, row: pd.Series, used_keys: set) -> str:
-    """
-    Generate unique DOI-based citation key.
+    """Generate unique DOI-based citation key.
 
     Format: DOI with special chars replaced by underscores
     Example: "10.1021/acsomega.2c06948" -> "10_1021_acsomega_2c06948"
@@ -261,24 +270,29 @@ def generate_citation_key(doi: str, row: pd.Series, used_keys: set) -> str:
     counter = 0
     while final_key in used_keys:
         counter += 1
-        # Add suffix: a, b, c, etc.
-        suffix = chr(ord("a") + (counter - 1))
+        suffix = chr(ord("a") + (counter - 1)) if counter <= 26 else str(counter)
         final_key = f"{base_key}_{suffix}"
 
     used_keys.add(final_key)
     return final_key
 
 
-def format_bibtex_entry(row: pd.Series, citation_key: str) -> str:
-    """
-    Generate complete BibTeX entry for a paper.
+def format_bibtex_entry(
+    row: pd.Series,
+    citation_key: str,
+    references: list[str] | None = None,
+    cited_by: list[str] | None = None,
+) -> str:
+    """Generate complete BibTeX entry for a paper.
 
     Args:
-        row: Paper data row
-        citation_key: Citation key for the entry
+        row: Paper data row.
+        citation_key: Citation key for the entry.
+        references: Optional list of cited DOIs (outgoing) → ``bibo:cites``.
+        cited_by: Optional list of citing DOIs (incoming) → ``bibo:citedBy``.
 
     Returns:
-        Formatted BibTeX entry string
+        Formatted BibTeX entry string.
     """
     itemtype = safe_get(row, "itemType")
     entry_type = ITEMTYPE_TO_BIBTEX.get(itemtype, "misc")
@@ -348,7 +362,7 @@ def format_bibtex_entry(row: pd.Series, citation_key: str) -> str:
     # DOI
     doi = safe_get(row, "DOI")
     if is_valid(doi):
-        lines.append(f"  doi = {{{escape_bibtex(str(doi))}}},")
+        lines.append(f"  doi = {{{escape_bibtex(_normalize_doi(str(doi)))}}},")
 
     # URL (landing page)
     url = safe_get(row, "url")
@@ -405,6 +419,26 @@ def format_bibtex_entry(row: pd.Series, citation_key: str) -> str:
     if is_valid(github_repo):
         lines.append(f"  howpublished = {{{github_repo}}},")
 
+    # Relevance score (SciLEx internal — consumed by RDF exporter)
+    relevance_score = safe_get(row, "relevance_score")
+    if is_valid(relevance_score):
+        lines.append(f"  relevancescore = {{{relevance_score}}},")
+
+    # Citation count (from aggregation pipeline — consumed by RDF exporter)
+    nb_citation = safe_get(row, "nb_citation")
+    if is_valid(nb_citation):
+        lines.append(f"  citationcount = {{{nb_citation}}},")
+
+    # References (cited DOIs — populates bibo:cites triples in RDF export)
+    if references:
+        refs_str = ", ".join(references)
+        lines.append(f"  references = {{{refs_str}}},")
+
+    # cited_by (citing DOIs — populates bibo:citedBy triples in RDF export)
+    if cited_by:
+        cited_by_str = ", ".join(cited_by)
+        lines.append(f"  cited_by = {{{cited_by_str}}},")
+
     # Close entry (remove trailing comma from last line)
     if lines[-1].endswith(","):
         lines[-1] = lines[-1][:-1]
@@ -414,8 +448,7 @@ def format_bibtex_entry(row: pd.Series, citation_key: str) -> str:
 
 
 def export_to_bibtex(data: pd.DataFrame, config: dict) -> str:
-    """
-    Export aggregated data to BibTeX file.
+    """Export aggregated data to BibTeX file.
 
     Args:
         data: DataFrame with aggregated papers
@@ -428,7 +461,7 @@ def export_to_bibtex(data: pd.DataFrame, config: dict) -> str:
     dir_collect = os.path.join(output_dir, config["collect_name"])
 
     # Output file path
-    output_file = os.path.join(dir_collect, "aggregated_results.bib")
+    output_file = os.path.join(dir_collect, BIBTEX_PLAIN_FILENAME)
 
     logger.info(f"Exporting {len(data)} papers to BibTeX")
     logger.info(f"Output file: {output_file}")
