@@ -6,7 +6,7 @@
 </div>
 
 <p align="center">
-    <em>Systematic literature search across 10 academic APIs</em>
+    <em>Systematic literature search across 12 academic APIs</em>
 </p>
 
 <p align="center">
@@ -41,7 +41,7 @@
 
 ## Overview
 
-**SciLEx** (Science Literature Exploration) is a Python toolkit for systematic literature reviews. It crawls 10 academic APIs in parallel, deduplicates results using DOI-based and normalized title exact matching, and applies a 5-phase quality filtering pipeline before exporting to Zotero or BibTeX.
+**SciLEx** (Science Literature Exploration) is a Python toolkit for systematic literature reviews. It crawls 12 academic APIs in parallel, deduplicates results using DOI-based and normalized title exact matching, and applies a 5-phase quality filtering pipeline before exporting to Zotero or BibTeX.
 
 
 ---
@@ -54,7 +54,7 @@
 
 ## Key Features
 
-- Multi-API collection with parallel processing (10 academic APIs)
+- Multi-API collection with parallel processing (12 academic APIs)
 - Smart deduplication using DOI and normalized title matching
 - 5-phase quality filtering pipeline with time-aware citation thresholds:
   1. **ItemType Filter** — whitelist by publication type (journal, conference, etc.)
@@ -69,18 +69,20 @@
 
 ### Supported APIs
 
-| API | Key Required | Best For |
-|-----|-------------|----------|
-| **SemanticScholar** | Optional | CS/AI papers, citation networks |
-| **OpenAlex** | Optional | Broad coverage, ORCID data |
-| **IEEE** | Yes | Engineering, CS conferences |
-| **Arxiv** | No | Preprints, physics, CS |
-| **Springer** | Yes | Journals, books |
-| **Elsevier** | Yes | Medical, life sciences |
-| **PubMed** | Optional | 35M biomedical papers |
-| **HAL** | No | French research, theses |
-| **DBLP** | No | CS bibliography, 95%+ DOI |
-| **Istex** | No | French institutional access |
+| API | Key Required | Coverage | Best For |
+|-----|-------------|----------|----------|
+| **SemanticScholar** | Optional | 200M+ papers | CS/AI papers, citation networks |
+| **OpenAlex** | Optional | 250M+ works | Broad coverage, ORCID data |
+| **IEEE** | Yes | 5M+ docs | Engineering, CS conferences |
+| **Arxiv** | No | 2M+ preprints | Preprints, physics, CS |
+| **Springer** | Yes | 13M+ docs | Journals, books |
+| **Elsevier** | Yes | 18M+ articles | Medical, life sciences |
+| **PubMed** | Optional | 35M+ papers | Biomedical literature |
+| **HAL** | No | 1M+ docs | French research, theses |
+| **DBLP** | No | 6M+ CS papers | CS bibliography, 95%+ DOI |
+| **Istex** | No | 25M+ docs | French institutional access |
+| **OpenAIRE** | No | 200M+ docs | Open-access, EU research |
+| **ORKG** | No | 55K papers | Structured CS research comparisons |
 
 See the [API Comparison](https://scilex.readthedocs.io/en/latest/reference/api-comparison.html) for rate limits, coverage details, and limitations.
 
