@@ -85,7 +85,7 @@ API Collection → Deduplication → Item Type Filter → Keyword Filter → Qua
 
 # Research use / scholarly publications enabled
 
-SciLEx was originally developed to support a systematic literature review conducted during a PhD on pattern-based information extraction from natural language and knowledge graphs, presented at AAAI-24 [@ringwald_aaai24]. The tool has since been generalised and extended to support literature reviews across a broader range of research areas, particularly in AI and machine learning, where the need to survey rapidly growing bodies of preprint and conference literature across heterogeneous sources is especially acute. SciLEx is designed for researchers and graduate students who need to scope a new research area, assemble a reproducible corpus, or conduct a formal systematic review — and has been used in this capacity within the Wimmics research groups. The first systematic literature review based on SciLEx [@celian2025systematicreviewrelationextraction] is actually under-review.
+SciLEx was originally developed to support a systematic literature review conducted during a PhD on pattern-based information extraction from natural language and knowledge graphs, presented at AAAI-24 [@Ringwald_2024]. The tool has since been generalised and extended to support literature reviews across a broader range of research areas, particularly in AI and machine learning, where the need to survey rapidly growing bodies of preprint and conference literature across heterogeneous sources is especially acute. SciLEx is designed for researchers and graduate students who need to scope a new research area, assemble a reproducible corpus, or conduct a formal systematic review — and has been used in this capacity within the Wimmics research groups. The first systematic literature review based on SciLEx [@celian2025systematicreviewrelationextraction] is actually under-review.
 
 # Comparison with existing software
 
@@ -111,8 +111,7 @@ ResearchRabbit, Litmaps, and ConnectedPapers are web-based citation mapping tool
 
 # Development agenda
 
-
-- 
+- The usage of SciLEx in fastmoving and dynamic research fields may ask to use SciLEx to also update and extend an existing collection. The experience of our survey [@celian2025systematicreviewrelationextraction], also demonstrated the high annotation cost requiered by a Systematic Literature Review. The collaborative tag annotation of the corpora collected and enriched using Zotero, let us envisagate the potentially extension that could also be derived from it from keywords extraction for future collects or the extension of the annotation to the full corpora after Annotation Guideline consolidation and cross-annotation.  
 
 # Acknowledgements
 
