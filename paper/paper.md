@@ -36,7 +36,7 @@ Finally, SciLEx exports all gathered information into a Zotero collection, facil
 ### Key Features
 [SCHEMA]
 
-- Multi-API collection with parallel processing (PubMed, SemanticScholar, OpenAlex, IEEE, Arxiv, Springer, HAL, DBLP, Istex, PubMed)
+- Multi-API collection with parallel processing (PubMed, Semantic Scholar, OpenAlex, IEEE Xplore, arXiv, Springer, HAL, DBLP, ISTEX)
 - Complex queries requests: two options only use a list of keywords (that will create a query per keyword) or the definition of two keywords list that will be used to combine one by one each keyword of both list, and implicitly allowing the define queries integrating both the logical OR and the logical AND
 - Smart deduplication using DOI and title matching
 - Citation network extraction via OpenCitations + Semantic Scholar with SQLite caching
