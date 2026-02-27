@@ -42,7 +42,7 @@ Finally, SciLEx exports all gathered information into a Zotero collection, facil
 - Citation network extraction via OpenCitations + Semantic Scholar with SQLite caching
 - Quality filtering pipeline integrating:
    * time-aware citation thresholds
-   * relevance ranking (based on keywords list and potential additional "bonus keywords"
+   * relevance ranking (based on keywords list and potential additional "bonus keywords")
    * itemType filtering
 - HuggingFace enrichment (NEW): Extract ML models, datasets, GitHub stats, and AI keywords
 - Bulk Zotero upload in batches of 50 items
