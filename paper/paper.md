@@ -37,7 +37,7 @@ Finally, SciLEx exports all gathered information into a Zotero collection, facil
 [SCHEMA]
 
 - Multi-API collection with parallel processing (PubMed, Semantic Scholar, OpenAlex, IEEE Xplore, arXiv, Springer, HAL, DBLP, ISTEX)
-- Complex queries requests: two options only use a list of keywords (that will create a query per keyword) or the definition of two keywords list that will be used to combine one by one each keyword of both list, and implicitly allowing the define queries integrating both the logical OR and the logical AND
+- Complex query support: either (1) use a single list of keywords (one query per keyword), or (2) define two keyword lists that are combined pairwise, implicitly yielding queries that integrate both logical OR and logical AND operators.
 - Smart deduplication using DOI and title matching
 - Citation network extraction via OpenCitations + Semantic Scholar with SQLite caching
 - Quality filtering pipeline integrating:
