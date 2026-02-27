@@ -12,7 +12,10 @@ authors:
     affiliation: 1
   - name: Benjamin Navet
     orcid: 0000-0001-6643-431X
-    affiliation: 1
+    affiliation: 1, 2
+  - name: Fabien Gandon
+orcid: 0000-0003-0543-1232
+affiliation: 1
 affiliations:
  - name: INRIA, 3IA, CNRS, I3S, Université Côte d'Azur
    index: 1
@@ -22,8 +25,13 @@ date: 29 January 2025
 bibliography: paper.bib
 
 ---
-![ScilexLogo](./img/small_logo.png)
-> SciLEx — much like the silex stone that early humans relied on to spark fire from raw material — is a lightweight, portable tool designed to ignite research exploration. Rather than navigating fragmented databases, confronting redundant results, and manually sifting through noise, SciLEx strikes directly at the core challenge: it queries heterogeneous digital library APIs, applies smart deduplication and quality filtering, and delivers a clean, curated corpus ready for export to Zotero or BibTeX. It is not a full-scale review platform — it is the essential flint in the researcher's toolkit, engineered to quick-start systematic literature reviews with precision and minimal friction.
+<p align="center">
+  <img src="./img/small_logo.png" alt="description" width="100">
+</p>
+
+# A Spark for Systematic Literature Reviews
+
+SciLEx — much like the silex stone that early humans relied on to spark fire from raw material — is a lightweight, portable tool designed to ignite research exploration. Rather than navigating fragmented databases, confronting redundant results, and manually sifting through noise, SciLEx strikes directly at the core challenge: it queries heterogeneous digital library APIs, applies smart deduplication and quality filtering, and delivers a clean, curated corpus ready for export to Zotero or BibTeX. It is not a full-scale review platform — it is the essential flint in the researcher's toolkit, engineered to quick-start systematic literature reviews with precision and minimal friction.
 
 # Detailed Summary
 [SciLEx (Science Literature Exploration)](https://github.com/Wimmics/SciLEx) is an open-source Python toolkit designed to support systematic literature reviews in research and academic contexts. Users define one or two groups of keywords: within each group, terms are combined with Boolean OR logic, while the two groups are combined with AND, enabling precise compound queries without manual query construction. SciLEx concurrently queries up to ten academic APIs — SemanticScholar, OpenAlex, IEEE, ArXiv, Springer, Elsevier, HAL, DBLP, Istex, and PubMed — and deduplicates results across sources using DOI matching, URL matching, and fuzzy title comparison, so that papers retrieved from multiple APIs are merged rather than counted multiple times. Collected papers then pass through a configurable multi-stage filtering pipeline that scores metadata completeness, enforces time-aware citation thresholds, and ranks results by a composite relevance score, distilling potentially hundreds of thousands of raw results into a curated final set. SciLEx further extracts citation networks via OpenCitations[@peroni_opencitations_2020] and Semantic Scholar, and optionally enriches records with Hugging Face metadata — linked models, datasets, and GitHub statistics — making it particularly suited to AI and machine learning literature reviews. Final outputs can be exported to BibTeX or pushed directly to a Zotero[@mueen_ahmed_zotero_2011] collection. All operations are idempotent: interrupted or repeated runs automatically resume from where they left off, making SciLEx practical on standard personal hardware.
@@ -40,6 +48,7 @@ Finally, SciLEx exports all gathered information into a Zotero collection, facil
 ![SciLEx_workflow](./img/workflow-diagram.pptx.jpg)
 
 SciLEx is built around the following core capabilities, each thoroughly documented in our [readthedocs.io](https://scilex.readthedocs.io/en/latest/):
+
 * Multi-source collection. Papers are retrieved concurrently from up to ten academic APIs — SemanticScholar, OpenAlex, IEEE, ArXiv, Springer, Elsevier, HAL, DBLP, Istex, and PubMed — using parallel processing to minimise collection time.
 * Flexible query construction. Users can either supply a flat list of keywords, generating one query per keyword, or define two keyword groups whose terms are combined pairwise — implicitly encoding both OR logic (within groups) and AND logic (across groups) — without writing raw query strings.
 * Cross-source deduplication. Results are deduplicated across APIs using DOI matching, URL matching, and fuzzy title comparison, ensuring that papers retrieved from multiple sources are merged into a single record.
