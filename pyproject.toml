@@ -16,6 +16,7 @@ dependencies = [
     "huggingface-hub>=1.2.1",
     "httpx<0.28.0",
     "lxml>=6.0",
+    "networkx>=3.0",
     "numpy>=2.0",
     "pandas>=2.0",
     "pyyaml>=6.0",
@@ -34,6 +35,9 @@ dev = [
     "pytest-cov>=5.0",
     "ruff>=0.1.0",
 ]
+graph = [
+    "python-louvain>=0.16",
+]
 
 [project.scripts]
 scilex-collect = "scilex.run_collection:main"
@@ -43,6 +47,7 @@ scilex-push-zotero = "scilex.push_to_zotero:main"
 scilex-export-bibtex = "scilex.export_to_bibtex:main"
 scilex-enrich-citations = "scilex.enrich_with_citations:main"
 scilex-export-turtle = "scilex.export_to_turtle:main"
+scilex-analyze = "scilex.analyze:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

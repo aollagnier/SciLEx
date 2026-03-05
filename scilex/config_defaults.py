@@ -178,6 +178,26 @@ DEFAULT_SEMANTIC_SCHOLAR_MODE = "regular"
 Options: 'regular' (default, recommended) or 'bulk' (requires special access)."""
 
 # ============================================================================
+# GRAPH ANALYSIS SETTINGS
+# ============================================================================
+
+DEFAULT_GRAPH_TYPE = "cocitation"
+"""Type of similarity graph to build for community detection.
+Options: 'cocitation', 'coupling', 'both'."""
+
+DEFAULT_LOUVAIN_RESOLUTION = 1.0
+"""Louvain resolution parameter. Higher values produce more (smaller)
+communities. Typical range: 0.5-2.0. Default 1.0."""
+
+DEFAULT_GRAPH_MIN_WEIGHT = 1
+"""Minimum edge weight to include in the similarity graph.
+Increase to remove weak connections and produce cleaner clusters."""
+
+DEFAULT_GRAPH_FORMAT = "gexf"
+"""Default export format for graph files. Options: 'gexf', 'graphml'.
+GEXF is preferred for Gephi; GraphML for broader tool support."""
+
+# ============================================================================
 # API RATE LIMITS (requests per second)
 # ============================================================================
 
