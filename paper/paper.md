@@ -49,7 +49,7 @@ SciLEx enriches the extracted papers with many other open services, extracting c
 Finally, SciLEx exports all gathered information into a Zotero collection, facilitating collaborative management, selection, and annotation of the corpus.
 
 ### Key Features
-![SciLEx_workflow](./img/workflow-diagramV2.png)
+![SciLEx global overview](./img/workflow-diagramV2.png)
 
 SciLEx is built around the following core capabilities, each thoroughly documented in our [readthedocs.io](https://scilex.readthedocs.io/en/latest/):
 
