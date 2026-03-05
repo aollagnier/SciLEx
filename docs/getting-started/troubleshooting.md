@@ -319,7 +319,9 @@ Look for errors in console output or check the collection directory for state fi
 ### Run Tests
 
 ```bash
-uv run python -m pytest tests/ -v
+uv sync --extra dev                          # Install dev dependencies if not already done
+uv run python -m pytest tests/ -v           # All tests
+uv run python -m pytest tests/ -v -m "not live"  # Offline tests only
 ```
 
 ### Verify Configuration

@@ -34,7 +34,7 @@ uv run scilex-collect           # Example: run collection
 For developers (adds pytest, ruff, coverage):
 
 ```bash
-uv sync --dev
+uv sync --extra dev
 ```
 
 #### Option B: pip
