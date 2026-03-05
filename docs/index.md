@@ -1,6 +1,6 @@
 # SciLEx Documentation
 
-SciLEx is a Python toolkit for systematic literature reviews. It collects papers from 10 academic APIs, deduplicates results, applies a 5-phase quality filtering pipeline, and exports to Zotero or BibTeX.
+[SciLEx](https://github.com/Wimmics/SciLEx) is a Python toolkit for systematic literature reviews. It collects papers from 10 academic APIs, deduplicates results, applies a 5-phase quality filtering pipeline, and exports to Zotero or BibTeX.
 
 ```{toctree}
 :maxdepth: 2
