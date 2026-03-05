@@ -198,6 +198,22 @@ DEFAULT_GRAPH_FORMAT = "gexf"
 GEXF is preferred for Gephi; GraphML for broader tool support."""
 
 # ============================================================================
+# SNOWBALL SAMPLING SETTINGS
+# ============================================================================
+
+DEFAULT_SNOWBALL_DIRECTION = "both"
+"""Citation direction for snowball sampling.
+Options: 'backward' (references), 'forward' (citers), 'both'."""
+
+DEFAULT_SNOWBALL_TOP_K = 200
+"""Maximum number of candidate papers to fetch from Semantic Scholar.
+Higher values find more papers but take longer."""
+
+DEFAULT_SNOWBALL_MIN_FREQUENCY = 2
+"""Minimum number of corpus connections for a candidate to be considered.
+A candidate must be cited by (or cite) at least this many corpus papers."""
+
+# ============================================================================
 # API RATE LIMITS (requests per second)
 # ============================================================================
 

@@ -48,6 +48,7 @@ scilex-export-bibtex = "scilex.export_to_bibtex:main"
 scilex-enrich-citations = "scilex.enrich_with_citations:main"
 scilex-export-turtle = "scilex.export_to_turtle:main"
 scilex-analyze = "scilex.analyze:main"
+scilex-snowball = "scilex.snowball_sampling:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
