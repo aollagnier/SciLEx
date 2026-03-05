@@ -48,6 +48,8 @@ SciLEx enriches the extracted papers with many other open services, extracting c
 
 Finally, SciLEx exports all gathered information into a Zotero collection, facilitating collaborative management, selection, and annotation of the corpus.
 
+The reader may find in [Appendices](#appendix-filtering-funnel-example) a concrete illustration of SciLEx pipeline, from the view of the logs produced during the collect but also with a Funnel Pipeline Chart.
+
 ### Key Features
 ![SciLEx_workflow](./img/workflow-diagramV2.png)
 
@@ -97,7 +99,6 @@ SciLEx was originally developed to support a systematic literature review conduc
 
 CoLRev [@Wagner2024] is a comprehensive open-source environment for collaborative literature reviews that covers the full review lifecycle: problem formulation, search, deduplication, screening, PDF retrieval and preparation, and synthesis. It is built around Git-based collaboration and shared data standards, making it well suited for large, multi-reviewer systematic reviews that require auditability and reproducibility across teams. Compared to SciLEx, CoLRev is considerably broader in scope, addressing stages well beyond corpus assembly. SciLEx is more narrowly focused on the collection, deduplication, quality filtering, and enrichment phases, and is designed for individual researchers or small teams who need a lightweight, locally executable tool without the overhead of a full review management environment. The two tools are therefore largely complementary: SciLEx could be used to assemble an initial corpus that is then imported into CoLRev for screening and synthesis.
 
-> **Note (BN):** Broken citation key: [@Wagner2024] does not match the bib entry `wagner2026colrev`. The bib entry year is also wrong (2026 → 2024, confirmed via Zenodo DOI 10.5281/zenodo.11668338). Fix: rename bib key to `wagner2024colrev`, set year to 2024, and update citation to [@wagner2024colrev].
 
 **2. PyPaperRetriever (2025)**
 
@@ -117,15 +118,11 @@ ResearchRabbit, Litmaps, and ConnectedPapers are web-based citation mapping tool
 
 # Development agenda
 
-- The use of SciLEx in fast-moving and dynamic research fields may also involve updating and extending an existing literature collection. Our experience in conducting the survey [@celian2025systematicreviewrelationextraction] further highlighted the substantial annotation effort required for a systematic literature review. The collaborative tagging and annotation of the collected corpus—managed and enriched through Zotero—suggest promising extensions of this workflow. In particular, extracted keywords could inform future collection rounds, while annotation could be progressively expanded to the full corpus following the consolidation of annotation guidelines and the implementation of cross-annotation procedures.
-
-> **Note (BN):** Additional development agenda items to expand this section:
->
-> - **Citation chaining and snowball sampling.** Extending the collection phase with forward and backward citation chaining to complement keyword-based discovery and address its inherent vocabulary ceiling, following established snowball sampling guidelines (Wohlin, 2014).
-> - **Citation network analysis.** Leveraging the citation and reference data already collected to build citation graphs, detect research community clusters, and identify hub papers — turning raw citation counts into structural bibliometric insights without additional API calls.
-> - **LLM-augmented pipeline steps.** Introducing optional large language model–based stages: semantic abstract screening to reduce false positives and false negatives inherent to substring keyword matching, and AI-powered keyword expansion to assist users unfamiliar with a field's vocabulary in constructing effective queries.
-> - **PRISMA-compliant reporting.** Automatically generating a PRISMA 2020 flow diagram and provenance report from pipeline run metadata, documenting records identified, deduplicated, and excluded at each stage for direct inclusion in systematic review manuscripts.
-> - **Enrichment extensions.** Adding open access status classification via Unpaywall (gold/green/bronze/closed), author impact metrics (h-index) via the Semantic Scholar Author API.
+The use of SciLEx in fast-moving and dynamic research fields may also involve updating and extending an existing literature collection. Our experience in conducting the survey [@celian2025systematicreviewrelationextraction] further highlighted the substantial annotation effort required for a systematic literature review. The collaborative tagging and annotation of the collected corpus—managed and enriched through Zotero—suggest promising extensions of this workflow. In particular, extracted keywords could inform future collection rounds, while annotation could be progressively expanded to the full corpus following the consolidation of annotation guidelines and the implementation of cross-annotation procedures. Globally, many developments may be proposed as future work, we plan to prioritize the following: 
+- **Citation chaining and snowball sampling.** Extending the collection phase with forward and backward citation chaining to complement keyword-based discovery and address its inherent vocabulary ceiling, following established snowball sampling guidelines (Wohlin, 2014).
+- **Citation network analysis.** Leveraging the citation and reference data already collected to build citation graphs, detect research community clusters, and identify hub papers — turning raw citation counts into structural bibliometric insights without additional API calls.
+- **LLM-augmented pipeline steps.** Introducing optional large language model–based stages: semantic abstract screening to reduce false positives and false negatives inherent to substring keyword matching, and AI-powered keyword expansion to assist users unfamiliar with a field's vocabulary in constructing effective queries.
+- **Enrichment extensions.** Adding open access status classification via Unpaywall (gold/green/bronze/closed), author impact metrics (h-index) via the Semantic Scholar Author API.
 
 # Acknowledgements
 
