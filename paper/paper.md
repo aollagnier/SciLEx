@@ -49,7 +49,7 @@ SciLEx enriches the extracted papers with many other open services, extracting c
 Finally, SciLEx exports all gathered information into a Zotero collection, facilitating collaborative management, selection, and annotation of the corpus.
 
 ### Key Features
-![SciLEx_workflow](./img/workflow-diagram.pptx.jpg)
+![SciLEx_workflow](./img/workflow-diagramV2.png)
 
 > **Note (BN):** We need to update the workflow diagram with + 2 collectors. I shared with you the pptx so it can be easily modified in the hackmd working document. I let you go on the hack md we used and find the google drive link yourself because I  don 't want to commit it here (it is open)
 
