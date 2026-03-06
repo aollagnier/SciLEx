@@ -5,7 +5,6 @@ tags:
   - scientific literature
   - systematic review
   - paper retrieval
-  
 authors:
   - name: Célian Ringwald
     orcid: 0000-0002-7302-9037
