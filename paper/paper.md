@@ -55,7 +55,7 @@ Finally, SciLEx exports all gathered information into a Zotero collection, facil
 SciLEx is built around the following core capabilities, each thoroughly documented in our [readthedocs.io](https://scilex.readthedocs.io/en/latest/):
 
 * Multi-source collection. Papers are retrieved concurrently from up to twelve academic APIs — Semantic Scholar, OpenAlex, IEEE, ArXiv, Springer, Elsevier, HAL, DBLP, ORKG, OpenAIRE, Istex, and PubMed — using parallel processing to minimise collection time.
-* Flexible query construction. Users can either supply a flat list of keywords, generating one query per keyword, or define two keyword groups whose terms are combined pairwise — implicitly encoding both OR logic (within groups) and AND logic (across groups) — without writing raw query strings.
+* Flexible query construction. Users can either supply a flat list of keywords, generating one query per keyword, or define two keyword groups whose terms are combined pairwise — implicitly encoding both OR logic (within groups) and AND logic (across groups) — without writing raw query strings — as illustrated in [Appendix A](#appendix-a)
 * Cross-source deduplication. Results are deduplicated across APIs using DOI matching, URL matching, and normalized exact title matching, ensuring that papers retrieved from multiple sources are merged into a single record.
 * Citation network extraction. SciLEx retrieves citation and reference lists via OpenCitations and Semantic Scholar, with results cached locally in SQLite to avoid redundant API calls across runs. This enables both impact-based filtering and citation snowballing.
 * Multi-stage quality filtering. Collected papers pass through a configurable pipeline that enforces time-aware citation thresholds, filters by item type, and ranks results by a composite relevance score computed from keyword matches and optional bonus keywords.
@@ -74,7 +74,7 @@ API Collection → Deduplication → Item Type Filter → Keyword Filter → Qua
 
 **Format Conversion**. Raw JSON responses from each API are converted into a unified, Zotero-compatible internal schema by a dedicated converter in scilex/crawlers/aggregate.py. 
 
-**Aggregation and Filtering Pipeline**. The aggregation pipeline (scilex/aggregate_collect.py) loads all collected JSON files, applies format conversion and deduplication — merging records by DOI, URL, or normalized exact title match — and then passes papers through a five-phase filtering engine: item type filtering, keyword relevance filtering (scilex/keyword_validation.py), metadata quality scoring (scilex/quality_validation.py), time-aware citation thresholds, and final relevance ranking. A parallel aggregation mode (scilex/crawlers/aggregate_parallel.py) is also available for large corpora, using multiprocessing with batches of 5,000 papers and automatic CPU count detection. An illustrative example of this pipeline applied to a real collection run — showing paper counts at each stage — is provided in [Appendix A](#appendix-a).
+**Aggregation and Filtering Pipeline**. The aggregation pipeline (scilex/aggregate_collect.py) loads all collected JSON files, applies format conversion and deduplication — merging records by DOI, URL, or normalized exact title match — and then passes papers through a five-phase filtering engine: item type filtering, keyword relevance filtering (scilex/keyword_validation.py), metadata quality scoring (scilex/quality_validation.py), time-aware citation thresholds, and final relevance ranking. A parallel aggregation mode (scilex/crawlers/aggregate_parallel.py) is also available for large corpora, using multiprocessing with batches of 5,000 papers and automatic CPU count detection. An illustrative example of this pipeline applied to a real collection run — showing paper counts at each stage — is provided in [Appendix B](#appendix-b).
 
 **Citation System**. Citation and reference data are retrieved via a four-tier strategy: a local SQLite cache (output/citation_cache.db) is consulted first; if unavailable, Semantic Scholar in-memory data, CrossRef live API calls, and finally OpenCitations are tried in sequence. This tiered approach minimises redundant network requests while maximising coverage.
 
@@ -145,7 +145,12 @@ Scope of assistance:
 
 ---
 
-## Appendix A: Filtering Funnel Example {#appendix-a}
+## Appendix A: Keyword Combination examples {#appendix-a}
+
+
+![Examples of collects result given the 2 list of Keywords defined in SciLEx configuration](./img/KeywordsCombination.png)
+
+## Appendix B: Filtering Funnel Example {#appendix-b}
 
 The following example illustrates SciLEx's filtering pipeline applied to a real collection run on the topic of relation extraction. Starting from 259,845 raw results collected across 12 APIs, the pipeline progressively reduces the corpus to a curated set of 500 papers — a 1.5% retention rate.
 
