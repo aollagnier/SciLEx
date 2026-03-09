@@ -125,6 +125,7 @@ Further planned extensions include:
 - **Citation network analysis.** Leveraging the citation and reference data already collected to build citation graphs, detect research community clusters, and identify hub papers — turning raw citation counts into structural bibliometric insights without additional API calls.
 - **LLM-augmented pipeline steps.** Introducing optional large language model–based stages: semantic abstract screening to reduce false positives and false negatives inherent to substring keyword matching, and AI-powered keyword expansion to assist users unfamiliar with a field's vocabulary in constructing effective queries.
 - **Enrichment extensions.** Adding open access status classification via Unpaywall (gold/green/bronze/closed), author impact metrics (h-index) via the Semantic Scholar Author API.
+- **LLM-based pre-annotation** Annotating paper using titles/abstracts (e.g., task, language, and domain) to accelerate downstream manual review. 
 
 # Acknowledgements
 
